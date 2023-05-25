@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catagory;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,14 @@ class HomeController extends Controller
         ->select(['id', 'client_name', 'client_designation', 'client_message', 'client_image'])
         ->get();
 
+        $catagoryes=Catagory::where('is_active',1)->latest('id')
+        ->limit(5)
+        ->select(['id','title','slug'])->get();
 
-        return view('frontend.pages.home',compact('testimonials'));
+        //return $catagoryes;
+
+
+        return view('frontend.pages.home',compact('testimonials','catagoryes'));
         // , compact('testimonials'));
     }
 
