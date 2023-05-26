@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $catagoryes = Catagory::where('is_active', 1)
         ->latest('id')
-        ->limit(4)
+        ->limit(5)
         ->select(['id', 'title', 'catagory_image','slug'])
         ->get();
 

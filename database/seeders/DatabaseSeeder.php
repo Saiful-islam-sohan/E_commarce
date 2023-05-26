@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Product;
 use App\Models\Testimonial;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CatagorySeeder;
@@ -26,7 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CatagorySeeder::class,
-            Testimonial::class
+            Testimonial::class,
+            Product::class,
         ]);
     }
 }
