@@ -7,7 +7,7 @@
                     @foreach ($catagoryes as $catagory)
                     <div class="featured-wrap">
                         <div class="featured-img">
-                            <img src="{{asset('assest/frontend')}}/images/featured/6.jpg" alt="">
+                            <img src="{{asset('uplodes/catagory/')}}/{{$catagory->catagory_image}}" alt="">
                             <div class="featured-content">
                                 <a href="shop.html">{{$catagory->title}}</a>
                             </div>

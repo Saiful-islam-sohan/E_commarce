@@ -25,6 +25,7 @@ catagory index
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Last modified</th>
+                    <th scope="col">image</th>
                     <th scope="col">Catagoey Name</th>
                     <th scope="col">Catagory Slug</th>
                     <th scope="col">Action</th>
@@ -35,6 +36,8 @@ catagory index
                   <tr>
                     <th scope="row">{{$categories->firstItem()+$loop->index}}</th>
                     <td>{{$catagory->updated_at ->format('Y-m-d')}}</td>
+
+                    <td><img src="{{ asset('uplodes/catagory') }}/{{ $catagory->catagory_image}}" alt="" class="img-fluid rounded h-20 w-20"></td>
                     <td>{{$catagory->title}}</td>
                     <td>{{$catagory->slug}}</td>
                     <td>

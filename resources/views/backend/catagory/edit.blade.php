@@ -20,7 +20,7 @@ Catagory edit
         <div class="col-8 m-auto">
 
 
-                    <form action="{{route('catagory.update',$catagory->id)}}" method="post">
+                    <form action="{{route('catagory.update',$catagory->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -31,6 +31,15 @@ Catagory edit
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-image" class="form-label">Category Image</label>
+                            <input type="file" class="form-control dropify" name="catagory_image" id="">
+                            @error('catagory_image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <div class="form-check form-switch">

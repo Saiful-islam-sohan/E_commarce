@@ -8,7 +8,7 @@ Catagory Create
 
 
 @section('admin_content')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="d-flex justify-content-start">
     {{-- <button type="button" class="btn btn-primary">Add Catagory</button> --}}
@@ -20,7 +20,7 @@ Catagory Create
         <div class="col-8 m-auto">
 
 
-                    <form action="{{route('catagory.store')}}" method="post">
+                    <form action="{{route('catagory.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Catagory Title</label>
@@ -30,6 +30,15 @@ Catagory Create
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-image" class="form-label">Category Image</label>
+                            <input type="file" class="form-control dropify" name="catagory_image" id="">
+                            @error('catagory_image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <div class="form-check form-switch">
@@ -45,4 +54,8 @@ Catagory Create
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('.dropify').dropify();
+</script>
 @endsection

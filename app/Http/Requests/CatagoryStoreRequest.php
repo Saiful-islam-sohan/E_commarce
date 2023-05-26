@@ -26,6 +26,7 @@ class CatagoryStoreRequest extends FormRequest
         return [
             'title'=>'bail|required|string|unique:catagories,title',
              //'slug'=>'bail|string'
+             'catagory_image'=>'required|image'
         ];
     }
 }

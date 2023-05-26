@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\CatagoryStoreRequest;
 use App\Http\Requests\UpdateCatagoryRequest;
-
+use Image;
 class CatagoryController extends Controller
 {
     /**
@@ -21,7 +21,7 @@ class CatagoryController extends Controller
      */
     public function index()
     {
-        $categories=Catagory::latest('id')->select(['id','title','slug','updated_at'])->paginate();
+        $categories=Catagory::latest('id')->select(['id','title','slug','updated_at','catagory_image'])->paginate();
 
         //return $categories;
 
@@ -46,14 +46,16 @@ class CatagoryController extends Controller
      */
     public function store(CatagoryStoreRequest $request)
     {
-        // dd($request->all());
+        //  dd($request->all());
 
 
-         Catagory::create([
+        $catagory=Catagory::create([
                  'title'=>$request->title,
                 'slug'=>Str::slug($request->title)
 
          ]);
+        //  $this->image_upload($request, $catagory->id);
+        $this->image_upload($request,$catagory->id);
          Toastr::success('Create New Catagory successfully!');
         return redirect()->route('catagory.index');
     }
@@ -106,6 +108,7 @@ class CatagoryController extends Controller
          'slug'=>Str::slug($request->title)
 
     ]);
+    $this->image_upload($request,$catagory->id);
     // $validatedData = $request->validate([
     //     'tital' => 'baill|required|string',
     // ]);
@@ -122,10 +125,47 @@ class CatagoryController extends Controller
      */
     public function destroy($id)
     {
-        $catagory=Catagory::findOrFail($id)->delete();
+        $catagory=Catagory::findOrFail($id);
+        if($catagory->catagory_image)
+        {
+            $photo_location='uploads/catagory/'.$catagory->catagory_image;
+            unlink($photo_location);
+        }
        // return $catagory;
+       $catagory->delete();
        Toastr::success('Delete Catagory successfully!');
         return redirect()->route('catagory.index');
 
     }
+    public function image_upload($request, $item_id)
+    {
+
+        $catagory = Catagory::findorFail($item_id);
+        //dd($request->all(), $category, $request->hasFile('category_image'));
+        if ($request->hasFile('catagory_image')) {
+            if ($catagory->catagory_image != 'default-image.jpg') {
+                //delete old photo
+                $photo_location = 'public/uploads/catagory/';
+                $old_photo_location = $photo_location . $catagory->catagory_image;
+                unlink(base_path($old_photo_location));
+            }
+            $photo_location = 'public/uplodes/catagory/';
+            $uploaded_photo = $request->file('catagory_image');
+            $new_photo_name = $catagory->id . '.' . $uploaded_photo->getClientOriginalExtension();
+            $new_photo_location = $photo_location . $new_photo_name;
+            Image::make($uploaded_photo)->resize(300,260)->save(base_path($new_photo_location), 40);
+            //$user = User::find($category->id);
+            $check = $catagory->update([
+                'catagory_image' => $new_photo_name,
+            ]);
+        }
+    }
+
+
+
+
+
 }
+
+
+

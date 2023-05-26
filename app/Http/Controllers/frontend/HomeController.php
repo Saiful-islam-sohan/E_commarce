@@ -19,9 +19,17 @@ class HomeController extends Controller
         ->select(['id', 'client_name', 'client_designation', 'client_message', 'client_image'])
         ->get();
 
-        $catagoryes=Catagory::where('is_active',1)->latest('id')
-        ->limit(5)
-        ->select(['id','title','slug'])->get();
+        // $catagoryes=Catagory::where('is_active',1)
+        // ->latest('id')
+        // ->limit(3)
+        // ->select(['id','title','catagory_image','slug'])
+        // ->get();
+
+        $catagoryes = Catagory::where('is_active', 1)
+        ->latest('id')
+        ->limit(4)
+        ->select(['id', 'title', 'catagory_image','slug'])
+        ->get();
 
         //return $catagoryes;
 
