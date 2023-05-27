@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\CatagoryController as BackendCatagoryController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\CatagoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\frontend\HomeController;
@@ -50,6 +51,7 @@ Route::prefix('/admin')->group(function(){
 
 Route::resource('/catagory',BackendCatagoryController::class);
 Route::resource('/testimonial',TestimonialController::class);
+Route::resource('/products',ProductController::class);
 
 });
 
