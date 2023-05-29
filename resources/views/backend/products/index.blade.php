@@ -11,7 +11,7 @@ Testimonial index
 
 <div class="d-flex justify-content-end">
     {{-- <button type="button" class="btn btn-primary">Add Catagory</button> --}}
-    <a href="{{route('products.create')}}" type="button" class="btn btn-primary"> Add Testimonial</a>
+    <a href="{{route('products.create')}}" type="button" class="btn btn-primary"> Add Product</a>
 </div>
 
 <div class="container">

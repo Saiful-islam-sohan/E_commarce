@@ -128,7 +128,7 @@ class CatagoryController extends Controller
         $catagory=Catagory::findOrFail($id);
         if($catagory->catagory_image)
         {
-            $photo_location='uploads/catagory/'.$catagory->catagory_image;
+            $photo_location='public/uplodes/catagory/'.$catagory->catagory_image;
             unlink($photo_location);
         }
        // return $catagory;
