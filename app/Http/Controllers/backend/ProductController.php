@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\UpdatrStoreRequest;
+use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,7 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-
+             //dd($request->all());
            $product = Product::create([
             'category_id' => $request->category_id,
             'name' => $request->name,
@@ -67,7 +68,7 @@ class ProductController extends Controller
         ]);
 
         $this->image_upload($request, $product->id);
-        // $this->multiple_image__upload($request, $product->id);
+        $this->multiple_image__upload($request, $product->id);
 
         Toastr::success('Data Stored Successfully!');
         return redirect()->route('products.index');
@@ -121,7 +122,7 @@ class ProductController extends Controller
         ]);
 
         $this->image_upload($request, $product->id);
-        // $this->multiple_image__upload($request, $product->id);
+        $this->multiple_image__upload($request, $product->id);
 
         Toastr::success('Data Updated Successfully!');
         return redirect()->route('products.index');
@@ -168,5 +169,39 @@ class ProductController extends Controller
             ]);
         }
 
+    }
+
+
+    public function multiple_image__upload($request, $product_id)
+    {
+        if ($request->hasFile('product_multiple_image')) {
+
+            // delete old photo first
+            $multiple_images = ProductImage::where('product_id', $product_id)->get();
+            foreach ($multiple_images as $multiple_image) {
+                if ($multiple_image->product_multiple_photo_name != 'default_product.jpg') {
+                    //delete old photo
+                    $photo_location = 'public/uplodes/product_photos/';
+                    $old_photo_location = $photo_location . $multiple_image->product_multiple_photo_name;
+                    unlink(base_path($old_photo_location));
+                }
+                // delete old value of db table
+                $multiple_image->delete();
+            }
+
+            $flag = 1; // Assign a flag variable
+
+            foreach ($request->file('product_multiple_image') as $single_photo) {
+                $photo_location = 'public/uplodes/product_photos/';
+                $new_photo_name = $product_id.'-'.$flag.'.'. $single_photo->getClientOriginalExtension();
+                $new_photo_location = $photo_location . $new_photo_name;
+                Image::make($single_photo)->resize(600, 622)->save(base_path($new_photo_location), 40);
+                ProductImage::create([
+                    'product_id' => $product_id,
+                    'product_multiple_image' => $new_photo_name,
+                ]);
+                $flag++;
+            }
+        }
     }
 }

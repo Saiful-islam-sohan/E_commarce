@@ -31,6 +31,8 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 
 Route::prefix('')->group(function(){
     Route::get('/',[HomeController::class,'home'])->name('home');
+    // Route::get('/shope',[HomeController::class,'shoppage'])->name('shop.page');
+    Route::get('/shope',[HomeController::class,'shopPage'])->name('shope');
 
 });
 

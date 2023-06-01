@@ -153,7 +153,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                         </div>
                         <!-- Product Image Section -->
 
-                        {{-- <!-- Product Multiple Image Section -->
+                        <!-- Product Multiple Image Section -->
                         <div class="col-12 mb-3">
                             <label for="product-image" class="form-label">Product Multiple Image</label>
                             <input type="file" class="form-control" multiple name="product_multiple_image[]">
@@ -162,7 +162,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div> --}}
+                        </div>
                         <!-- Product Multiple Image Section -->
 
                         <div class="col-6 mb-3 form-check form-switch">
