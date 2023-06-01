@@ -64,5 +64,16 @@ class HomeController extends Controller
 
         ));
     }
+    public function productDetails($product_slug)
+    {
+        $product = Product::whereSlug($product_slug)
+            ->with('category','productImages')
+            ->first();
+
+        $related_products = Product::whereNot('slug', $product_slug)->select('id', 'name', 'slug', 'product_price', 'product_image')
+        ->limit(4)
+        ->get();
+        return view('frontend.pages.widgest.single_product', compact('product', 'related_products'));
+    }
 
 }

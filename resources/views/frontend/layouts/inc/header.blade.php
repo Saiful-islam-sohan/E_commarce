@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-7 col-sm-6 col-6">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="{{route('home')}}">
                     <img src="{{asset('assest/frontend')}}/images/logo.png" alt="">
                     </a>
                     </div>
@@ -39,7 +39,7 @@
                 <div class="col-lg-7 d-none d-lg-block">
                     <nav class="mainmenu">
                         <ul class="d-flex">
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="{{route('home')}}">Home</a></li>
                             <li><a href="about.html">About</a></li>
                             <li>
                                 <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>

@@ -33,6 +33,7 @@ Route::prefix('')->group(function(){
     Route::get('/',[HomeController::class,'home'])->name('home');
     // Route::get('/shope',[HomeController::class,'shoppage'])->name('shop.page');
     Route::get('/shope',[HomeController::class,'shopPage'])->name('shope');
+    Route::get('/single-product/{product_slug}', [HomeController::class, 'productDetails'])->name('productdetail.page');
 
 });
 
