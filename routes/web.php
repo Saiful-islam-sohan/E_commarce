@@ -4,10 +4,12 @@ use App\Http\Controllers\backend\CatagoryController as BackendCatagoryController
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\CatagoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TestimonialController;
+use App\Models\CouponController;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
@@ -34,6 +36,9 @@ Route::prefix('')->group(function(){
     // Route::get('/shope',[HomeController::class,'shoppage'])->name('shop.page');
     Route::get('/shope',[HomeController::class,'shopPage'])->name('shope');
     Route::get('/single-product/{product_slug}', [HomeController::class, 'productDetails'])->name('productdetail.page');
+    Route::get('/shopping_cart',[CartController::class,'cartPage'])->name('cart.page');
+    Route::post('/addtocart',[CartController::class,'AddTocart'])->name('add-to.cart');
+
 
 });
 
@@ -55,6 +60,7 @@ Route::prefix('/admin')->group(function(){
 Route::resource('/catagory',BackendCatagoryController::class);
 Route::resource('/testimonial',TestimonialController::class);
 Route::resource('/products',ProductController::class);
+Route::resource('/coupon',CouponController::class);
 
 });
 
