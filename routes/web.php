@@ -38,6 +38,7 @@ Route::prefix('')->group(function(){
     Route::get('/single-product/{product_slug}', [HomeController::class, 'productDetails'])->name('productdetail.page');
     Route::get('/shopping_cart',[CartController::class,'cartPage'])->name('cart.page');
     Route::post('/addtocart',[CartController::class,'AddTocart'])->name('add-to.cart');
+    Route::get('/remove-from-cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('removefrom.cart');
 
 
 });

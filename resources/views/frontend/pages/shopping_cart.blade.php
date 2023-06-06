@@ -30,9 +30,9 @@
                             <div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></td>
                             <td class="total">৳{{ $cartitem->price*$cartitem->qty }}</td>
                             <td class="remove">
-                                {{-- <a href="{{ route('removefrom.cart',['cart_id' => $cartitem->rowId]) }}">
+                                <a href="{{ route('removefrom.cart',['cart_id' => $cartitem->rowId]) }}">
                                     <i class="fa fa-times"></i>
-                                </a> --}}
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -83,8 +83,8 @@
                             <a href="{{ route('customer.checkoutpage') }}">Proceed to Checkout</a>
                         </div>
                     </div>
-                </div>
-            </div> --}}
+                </div> --}}
+            </div>
         </div>
     </div>
 </div>
