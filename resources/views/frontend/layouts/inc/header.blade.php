@@ -15,13 +15,14 @@
                                     class="fa fa-angle-down"></i></a>
                             <ul class="dropdown_style">
                                 <li><a href="login.html">Login</a></li>
-                                <li><a href="register.html">Register</a></li>
+                                <li><a href="#">Register</a></li>
                                 <li><a href="{{ route('cart.page') }}">Cart</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="wishlist.html">wishlist</a></li>
+                                <li><a href="{{route('customer_logout')}}">logout</a></li>
                             </ul>
                         </li>
-                        <li><a href="register.html"> Login/Register </a></li>
+                        <li><a href="{{route('register_page_c')}}"> Login/Register </a></li>
                     </ul>
                 </div>
             </div>

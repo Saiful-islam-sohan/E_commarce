@@ -4,7 +4,9 @@ use App\Http\Controllers\backend\CatagoryController as BackendCatagoryController
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\CatagoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\frontend\auth\RegisterController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\CustomerControler;
 use App\Http\Controllers\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -39,6 +41,32 @@ Route::prefix('')->group(function(){
     Route::get('/shopping_cart',[CartController::class,'cartPage'])->name('cart.page');
     Route::post('/addtocart',[CartController::class,'AddTocart'])->name('add-to.cart');
     Route::get('/remove-from-cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('removefrom.cart');
+    // customer authentication
+
+    // Route::get('/register',[RegisterController::class],'registerpage')->name('register_page');
+    // Route::Post('/register',[RegisterController::class],'registerStore')->name('register.store');
+    // Route::get('/login', [RegisterController::class, 'loginPage'])->name('login.page');
+    // Route::post('/login', [RegisterController::class, 'loginStore'])->name('login.store');
+
+    Route::get('/register',[RegisterController::class,'registerPage'])->name('register_page_c');
+    Route::post('/register',[RegisterController::class,'registerStore'])->name('registore_store_c');
+    Route::get('/login',[RegisterController::class,'loginPage'])->name('login_page');
+    Route::post('/login',[RegisterController::class,'loginStore'])->name('login_store');
+
+
+    // Route::prefix('customer/')->middleware('auth')->group(function(){
+    //     Route::get('dashboard',[CustomerControler::class, 'dashboard'])->name('customer.dashboard');
+    //     Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
+
+    // });
+
+   Route::prefix('customer/')->middleware(['auth'])->group(function(){
+
+    Route::get('dashboard',[CustomerControler::class,'dashboard'])->name('customer_dashboard');
+    Route::get('/logout',[RegisterController::class,'logout'])->name('customer_logout');
+
+   });
+
 
 
 });
