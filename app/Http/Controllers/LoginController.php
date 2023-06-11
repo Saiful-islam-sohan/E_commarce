@@ -26,7 +26,8 @@ class LoginController extends Controller
         if (Auth::attempt($credentials,$request->filled('remember'))) {
             // Authentication successful
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            // return redirect()->intended('/dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
     }
@@ -35,7 +36,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
     }

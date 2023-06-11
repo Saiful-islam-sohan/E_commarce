@@ -60,7 +60,7 @@ Route::prefix('')->group(function(){
 
     // });
 
-   Route::prefix('customer/')->middleware(['auth'])->group(function(){
+   Route::prefix('customer/')->middleware(['auth','is_customer'])->group(function(){
 
     Route::get('dashboard',[CustomerControler::class,'dashboard'])->name('customer_dashboard');
     Route::get('/logout',[RegisterController::class,'logout'])->name('customer_logout');
@@ -78,12 +78,13 @@ Route::prefix('/admin')->group(function(){
 
     Route::get('/login',[LoginController::class,'loginpage'])->name('admin.loginpage');
     Route::post('/login',[LoginController::class,'login'])->name('admin.login');
-    Route::get('/logout',[LoginController::class,'loginpage'])->name('admin.logout');
+    // Route::get('/logout',[LoginController::class,'loginpage'])->name('admin.logout');
 
     // Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard')->middleware('auth');
 
-      Route::middleware('auth')->group(function(){
+      Route::middleware(['auth','is_admin'])->group(function(){
                  Route::get('dashboard',[DashboardController::class,'dashboard'])->name('admin.dashboard');
+                 Route::get('/logout',[LoginController::class,'logout'])->name('admin.logout');
       });
 
 Route::resource('/catagory',BackendCatagoryController::class);
